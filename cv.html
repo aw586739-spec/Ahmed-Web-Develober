@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed Walid | CV</title>
+  <meta name="description" content="Ahmed Walid is a Front-End Web Developer specialized in HTML, CSS, JavaScript, Bootstrap, Tailwind, and modern responsive websites. Download CV and view portfolio.">
+  <meta property="og:title" content="Ahmed Walid | Web Developer">
+  <meta property="og:description" content="Front-End Developer Portfolio & CV">
+  <meta property="og:image" content="https://yourdomain.com/image.png">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .navbar{
+        top: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .img {
+      display: block;
+      max-width: 90%;
+      border-radius: 15px;
+      margin: 40px auto 20px;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    img:hover {
+      transform: scale(0.95);
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+    }
+
+    .btns {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    @media (min-width: 768px) {
+      .img {
+        width: 40%;
+        height: auto;
+      }
+    }
+    @media (max-width: 600px) {
+      .nav-img , .navbar-toggler {
+        display: none;
+      }
+      .logo{
+        text-align: center;
+        width: 100%;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="logo navbar-brand">
+                <span><i class="fa-solid fa-a"></i></span>
+                <span><i class="fa-solid fa-h"></i></span>
+                <span><i class="fa-solid fa-m"></i></span>
+                <span><i class="fa-solid fa-e"></i></span>
+                <span><i class="fa-solid fa-d"></i></span>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <div class="w-100 text-end">
+                  <img class="img-fluid nav-img" style="height: 50px;width: 50px;border-radius: 50%;" src="../Black Yellow Brush Streetwear Brand Logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </nav>
+  <img class="img" src="../image.png" alt="Ahmed Walid CV Preview" class="img-fluid">
+  <div class="btns">
+    <a href="AHMED_WALID_CV (3).pdf" class="btn btn-outline-primary px-4" download>
+      <i class="fa-solid fa-download me-2"></i> Download CV
+    </a>
+    <a href="index.html" class="btn btn-outline-danger px-4">
+      <i class="fa-solid fa-arrow-left me-2"></i> Back
+    </a>
+  </div>
+
+  <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

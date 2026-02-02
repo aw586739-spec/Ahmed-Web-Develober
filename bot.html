@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Walid AI Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .bot-container {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            max-width: 90%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bot-header {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            background: #1a1a2e;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 300px;
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user-msg {
+            background: #302b63;
+            align-self: flex-end;
+        }
+
+        .bot-msg {
+            background: #4e4e9c;
+            align-self: flex-start;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            background: #ffd700;
+            border: none;
+            padding: 0 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #ffca00;
+        }
+
+        .home-btn {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .home-btn a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .home-btn a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bot-container">
+        <div class="bot-header"><i class="fa-solid fa-robot"></i> Ahmed Walid AI Bot</div>
+        <div class="messages" id="messages">
+            <div class="bot-msg rounded-4">مرحباً! اسألني عن المهندس أحمد 😎</div>
+        </div>
+        <div class="suggestions" id="suggestions" style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:5px;">
+        </div>
+
+        <div class="input-area">
+            <button onclick="sendMessage()">Send</button>
+            <input type="text" id="userInput" placeholder="اكتب سؤالك هنا...">
+        </div>
+        <div class="home-btn">
+            <a href="index.html"><i class="fa-solid fa-house"></i> العودة للصفحة الرئيسية</a>
+        </div>
+    </div>
+
+    <script>
+        const messagesEl = document.getElementById('messages');
+
+        // بيانات أحمد وليد
+        const info = {
+            name: "Ahmed Walid",
+            age: 17,
+            location: "Minya, Egypt",
+            intro: [
+                "أنا أحمد وليد، مطور فرونت إند.",
+                "أحب البرمجة وتصميم واجهات المستخدم.",
+                "أعمل على بناء مواقع وتطبيقات ويب حديثة.",
+                "أؤمن بأن الكود النظيف سر النجاح.",
+                "أنا طالب في WE School Of Applied Technology.",
+                "أهتم بتعلم تقنيات جديدة كل يوم.",
+                "أحب Flutter وDart لتطوير تطبيقات الموبايل.",
+                "أتعلم React لبناء واجهات تفاعلية."
+            ],
+            contact: [
+                "يمكنك مراسلتي على البريد الإلكتروني: ah.wa.ah12@gmail.com",
+                "WhatsApp للتواصل السريع: +201023046551",
+                "يمكنك الاتصال بي مباشرة لأي استفسار.",
+                "أفضل وسيلة للتواصل هي البريد الإلكتروني."
+            ],
+            skills: [
+                "HTML5, CSS3, JavaScript",
+                "Bootstrap و Tailwind لتصميم واجهات جذابة",
+                // "React لبناء واجهات ديناميكية",
+                "Python للبرمجة العامة والأتمتة",
+                // "Flutter & Dart لتطوير تطبيقات الموبايل قريبا",
+                // "Node.js لإنشاء السيرفرات",
+                // "Git و GitHub لإدارة المشاريع",
+                // "Databases لتخزين البيانات بشكل فعال",
+                // "VS Code كبيئة تطوير أساسية",
+                // "Figma لتصميم واجهات المستخدم",
+                // "DevTools لتصحيح الأخطاء وتحسين الأداء"
+            ],
+            interests: [
+                "Web Development",
+                "UI/UX Design",
+                // "Mobile Apps",
+                "AI & Machine Learning",
+                "Problem Solving",
+                "Learning New Tech",
+                "Programming Challenges",
+                "Modern Front-End Technologies",
+                "Creating Interactive Websites",
+                "Developing Responsive Design"
+            ],
+            projects: [
+                "Personal Portfolio Website",
+                "E-commerce Website",
+                // "React Learning Projects",
+                "Python Automation Scripts",
+                // "Flutter Mobile App",
+                "Small Games in JavaScript",
+                "Website Redesign Projects",
+                "Landing Pages for Startups",
+                // "Blog Platform",
+                "Interactive Forms with JS Validation"
+            ],
+            education: [
+                "طالب في WE School Of Applied Technology",
+                "أتخصص في Front-End Development",
+                "أتعلم UI/UX Design",
+                "أتابع الدورات التدريبية على الإنترنت",
+                "أدرس Python وJavaScript وFlutter",
+                "أحب المشاركة في مشاريع تعليمية جماعية",
+                "شغوف وبحب العمل الجماعي مش هنبداء البروجيكت ولا اي 😂❤️"
+            ],
+            funFacts: [
+                "أحب تعلم تقنيات جديدة",
+                "أتابع كل جديد في البرمجة والتصميم",
+                "أؤمن بأن الكود النظيف هو سر النجاح",
+                "أحب التحديات البرمجية",
+                "أفضل حل المشكلات بطريقة إبداعية",
+                "أشارك في مجتمعات المطورين عبر الإنترنت",
+                "أحب الكتابة عن البرمجة على المدونات"
+            ]
+        };
+
+        // دالة لإرسال الردود
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            // إضافة رسالة المستخدم
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user-msg';
+            userMsg.textContent = text;
+            messagesEl.appendChild(userMsg);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+
+            // استجابة البوت
+            const botMsg = document.createElement('div');
+            botMsg.className = 'message bot-msg';
+            botMsg.textContent = getResponse(text);
+
+            messagesEl.appendChild(botMsg);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+            input.value = "";
+        }
+
+        // دالة البحث الذكي: تبحث عن أي كلمة مفتاحية
+        function getResponse(question) {
+            question = question.toLowerCase();
+
+            const keywords = {
+                skills: ["مهارات", "projects", "skills", "بيشتغل", "coding"],
+                interests: ["اهتمامات", "اهتمام", "languages", "اللغات", "حب"],
+                projects: ["مشاريع", "projects", "websites", "apps"],
+                contact: ["تواصل", "اتصال", "contact", "mail", "رقم"],
+                intro: ["من هو", "who is", "عنك", "معلومات", "اعرف", "about"],
+                funFacts: ["معلومة", "fun", "fact", "حقائق", "interesting", "شيء" , "رقم"]
+            };
+
+            for (const [key, words] of Object.entries(keywords)) {
+                if (words.some(word => question.includes(word))) {
+                    return random(info[key]);
+                }
+            }
+
+            return "آسف 😅، مش قادر أفهم السؤال. اسألني عن مهارات أحمد، اهتماماته، أو طريقة التواصل معه.";
+        }
+
+        // دالة لتوليد رد عشوائي من المصفوفة
+        function random(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        const suggestionsEl = document.getElementById('suggestions');
+
+        // قائمة أسئلة مقترحة
+        const suggestedQuestions = [
+            "من هو أحمد وليد؟",
+            "ما هي مهارات أحمد؟",
+            "ما هي الاهتمامات",
+            "ما هي مشاريع أحمد؟",
+            "كيف أتواصل مع أحمد؟",
+            "أخبرني معلومة ممتعة"
+        ];
+
+        // عرض الأسئلة المقترحة
+        function showSuggestions() {
+            suggestionsEl.innerHTML = "";
+            suggestedQuestions.forEach(q => {
+                const btn = document.createElement("button");
+                btn.textContent = q;
+                btn.style.padding = "5px 10px";
+                btn.style.border = "none";
+                btn.style.borderRadius = "10px";
+                btn.style.cursor = "pointer";
+                btn.style.background = "#ffd700";
+                btn.style.color = "#000";
+                btn.onclick = () => {
+                    document.getElementById('userInput').value = q;
+                    sendMessage();
+                };
+                suggestionsEl.appendChild(btn);
+            });
+        }
+        // عرض الأسئلة عند تحميل الصفحة
+        window.addEventListener("DOMContentLoaded", () => {
+            showSuggestions();
+        });
+    </script>
+</body>
+</html>
